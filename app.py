@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import matplotlib.pyplot as plt
 from io import StringIO
+from PIL import Image, ImageOps, ImageDraw
 
 st.set_page_config(page_title="Housing Price Prediction", layout="wide")
 
@@ -22,6 +23,19 @@ def load_data():
     return df
 df = load_data()
 
+def make_image_round(image_path, size=(300, 300)):
+    img = Image.open(image_path).convert("RGBA")
+    img = img.resize(size, Image.LANCZOS)
+    bigsize = (img.size[0] * 3, img.size[1] * 3)
+    mask = Image.new('L', bigsize, 0)
+    draw = ImageDraw.Draw(mask) 
+    draw.ellipse((0, 0) + bigsize, fill=255)
+    mask = mask.resize(img.size, Image.LANCZOS)
+    img.putalpha(mask)
+    output = ImageOps.fit(img, mask.size, centering=(0.5, 0.5))
+    output.putalpha(mask)
+    return output
+
 if page == 'Overview':
     st.title('Data Analysis and Techniques')
     st.write('''For our data analysis project, we have chosen the Housing Price Prediction dataset from
@@ -33,11 +47,9 @@ if page == 'Overview':
     st.markdown(' [ ' + ' ], [ '.join(df.columns) + ' ] ')
     st.title('Housing Price in Delhi')
     
-    if st.checkbox('Show Dataset Preview', value= True):
-        df = load_data()
+    if st.checkbox('Show Dataset Preview', value=True):
         st.subheader('📊 Dataset of House Pricing')
         st.dataframe(df.head(200))
-
 
     st.divider()
 
@@ -60,24 +72,31 @@ if page == 'Overview':
 
 elif page == 'Home Page':
 
+    st.title('Authors')
+    st.subheader('''Meet the Team: **WildKonek**''')
 
-    # col1, col2, col3 = st.columns(3)
-    # with col1:
-    #     st.image('images\marsonpics.jpg', width=150, caption="Housing Price Prediction in Delhi")
-    # with col2:
-    #     st.image('images\marsonpics.jpg', width=150, caption="Housing Price Prediction in Delhi")
-    # with col3:
-    #     st.image('images\marsonpics.jpg', width=150, caption="Housing Price Prediction in Delhi")
-    st.subheader('Authors')
-    st.write('This project was created by WildKonek: ')
-    st.write('1. Breshly Abanid')
-    st.write('2. Ethan Jan Acasio')
-    st.write('3. Robert David Cala')
-    st.write('4. Nicole Cuizon')
-    st.write('5. Brian Despi')
-    st.write('6. Emmarson Gonzaga')
-    st.write('7. Raphael Ubas')
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        round_image = make_image_round('images/abanid.jpg', size=(150, 150))
+        st.image(round_image, width=200, caption="Breshly Abanid")
 
+        round_image = make_image_round('images/femaleavatar.jpg', size=(150, 150))
+        st.image(round_image, width=200, caption="Nicole Cuizon")
+    with col2:
+        round_image = make_image_round('images/images.jpg', size=(150, 150))
+        st.image(round_image, width=200, caption="Ethan Jan Acasio")
+
+        round_image = make_image_round('images/despi.jpg', size=(150, 150))
+        st.image(round_image, width=200, caption="Brian Despi")
+
+        round_image = make_image_round('images/images.jpg', size=(150, 150))
+        st.image(round_image, width=200, caption="Raphael Ubas")
+    with col3:
+        round_image = make_image_round('images/cala.jpg', size=(150, 150))
+        st.image(round_image, width=200, caption="Robert David Cala")
+
+        round_image = make_image_round('images/gonzaga.jpg', size=(150, 150))
+        st.image(round_image, width=200, caption="Emmarson Gonzaga")
 
 
 
