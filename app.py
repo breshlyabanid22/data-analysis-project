@@ -61,13 +61,13 @@ if page == 'Overview':
 elif page == 'Home Page':
 
 
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.image('images\marsonpics.jpg', width=150, caption="Housing Price Prediction in Delhi")
-    with col2:
-        st.image('images\marsonpics.jpg', width=150, caption="Housing Price Prediction in Delhi")
-    with col3:
-        st.image('images\marsonpics.jpg', width=150, caption="Housing Price Prediction in Delhi")
+    # col1, col2, col3 = st.columns(3)
+    # with col1:
+    #     st.image('images\marsonpics.jpg', width=150, caption="Housing Price Prediction in Delhi")
+    # with col2:
+    #     st.image('images\marsonpics.jpg', width=150, caption="Housing Price Prediction in Delhi")
+    # with col3:
+    #     st.image('images\marsonpics.jpg', width=150, caption="Housing Price Prediction in Delhi")
     st.subheader('Authors')
     st.write('This project was created by WildKonek: ')
     st.write('1. Breshly Abanid')
