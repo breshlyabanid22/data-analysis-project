@@ -40,7 +40,7 @@ if page == 'Overview':
     st.title('Data Analysis and Techniques')
     st.write('''For our data analysis project, we have chosen the Housing Price Prediction dataset from
             Kaggle. This dataset contains detailed information on housing prices and various features such as the
-            number of bedrooms, square footage, and location factors. The dataset comprises over 1,000
+            number of bedrooms, square footage, and location factors. The dataset comprises over 500
             rows, making it robust for analysis and modeling''')
     st.subheader('Dataset')
     st.subheader('The dataset contains the following columns:')
